@@ -1,0 +1,40 @@
+<!DOCTYPE html> 
+<html lang = "en">
+<head> 
+    <meta charset="utf-8">
+    <title>Assignment #2 - Q1 - Alex Khoury 40299086</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        function submitForm1(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            var phone = document.getElementById('phone').value; // Get the value of the input field
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/phoneFormat', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById('answer').innerText = document.getElementById('name').value + ':\n' + xhr.responseText;
+                }
+            };
+            xhr.send('phone=' + (phone)); // Send the form data
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        <label>Enter a name: </label>
+        <input id="name" name="name" type="text"><br>
+    
+        <label>Enter a phone number: </label>
+        <input id="phone" name="phone" type="text"><br><br>
+        <button type="submit" onclick="submitForm1(event)">Submit</button>
+        <p id="answer"></p>
+    </form><br>
+</body>
+
+</html>
+    
